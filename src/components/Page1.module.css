@@ -57,7 +57,7 @@
   background-size: 100% auto;
   background-position: center 45%;
   background-repeat: no-repeat;
-  transition: opacity 3s ease;
+  transition: opacity 3s ease 1s;
 }
 
 .brought {
