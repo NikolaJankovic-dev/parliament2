@@ -11,7 +11,7 @@ function App() {
     if (phase < 3) {
       setPage(<Page1 phase={phase} setPhase={setPhase}/>);
     }
-    if (phase === 3) {
+    if (phase >= 3)   {
       setPage(<Page2 phase={phase} setPhase={setPhase}/>);
     }
   },[phase]);
