@@ -1,0 +1,102 @@
+.page1 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bubble,
+.nobubble {
+  position: relative;
+  top: 30%;
+  aspect-ratio: 1/1;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("https://i.imgur.com/tHrkkQt.png");
+  background-size: auto 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: visible;
+  transition: all 1s ease;
+}
+
+.nobubble {
+  width: 0;
+}
+
+.bubble {
+  width: min(80%, 400px);
+}
+
+.meter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.imgur.com/NW6Olj1.png");
+  background-size: auto 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 2s ease;
+}
+
+.introducing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.imgur.com/7xNts0h.png");
+  background-size: 82% auto;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  transition: opacity 3s ease;
+}
+
+.prioritize {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.imgur.com/wUX1vkG.png");
+  background-size: 100% auto;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  transition: opacity 3s ease;
+}
+
+.brought {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(80%, 400px);
+  aspect-ratio: 1/1;
+  background-image: url("https://i.imgur.com/60rVFRw.png");
+  background-size: 90% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 3s ease 3s;
+}
+
+.btnStart,
+.btnNext {
+  position: absolute;
+  width: 20%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: none;
+  bottom: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 3s ease 3s;
+}
+
+.btnStart {
+  background-image: url("https://i.imgur.com/i3TZUD6.png");
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.btnNext {
+  background-image: url("https://i.imgur.com/8IqkSuR.png");
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}/*# sourceMappingURL=Page1.module.css.map */
