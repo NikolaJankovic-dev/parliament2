@@ -7,40 +7,33 @@ import style from "./Page2.module.css";
 const Page2 = ({ phase, setPhase }) => {
   const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
   const [isGame, setIsGame] = useState(false);
+  const [intro, setIntro] = useState(true);
   const noId = [];
   const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    if (phase === 4) {
-      const interval = setInterval(() => {
-        setSeconds(seconds + 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  });
+  const [btnStyle, setBtnStyle] = useState(style.btnNext);
   const bindBagPos = useDrag((params) => {
     setBagPos({
       x: params.offset[0],
       y: params.offset[1],
     });
   });
+
   const handleBtn = () => {
-    setPhase(phase + 1);
-  };
-  useEffect(() => {
-    if (phase === 4) {
-      const timer = setInterval(() => {
-        setSeconds(seconds + 1);
-      }, 1000);
-      const timer2 = setInterval(() => {
+    if (phase === 3) {
+      setPhase(4);
+      setSeconds(0);
+      setIntro(false);
+      setBtnStyle(style.noBtn);
+      const timer = setTimeout(() => {
         setIsGame(true);
-      }, 200);
-      return () => {
-        clearInterval(timer);
-        clearInterval(timer2);
-      };
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setPhase(3);
+      setIsGame(false);
+      setBtnStyle(style.btnNext)
     }
-  }, [phase]);
+  };
 
   const getTop = (el) => {
     let res = document.body.querySelector(el)?.getBoundingClientRect().top;
@@ -63,11 +56,22 @@ const Page2 = ({ phase, setPhase }) => {
     let res = document.body.querySelector(el)?.getBoundingClientRect().height;
     return res;
   };
-  const slike =
+
+  let gameintro = (
+    <div className={style.gameintro}>
+      <div className={style.bubble}>
+        <div className={style.seamless}></div>
+      </div>
+      <div className={style.move}></div>
+      <div className={style.arrows}></div>
+    </div>
+  );
+
+  let slike =
     phase === 3
       ? null
       : imagesArray?.map((element, index) => {
-          const lastImage = imagesArray[imagesArray.length - 1];
+          const lastImage = imagesArray.length - 1;
           if (
             element.fit === "no" &&
             getBottom(`.${element.name}`) > getTop(`#bag`) &&
@@ -77,11 +81,16 @@ const Page2 = ({ phase, setPhase }) => {
             getRight(`.${element.name}`) <= getRight(`#bag`)
           ) {
             noId.push(element);
+          } else if (
+            index === lastImage &&
+            getBottom(`.${element.name}`) > getTop(`#bag`)
+          ) {
+            noId.push(element);
           }
 
           return (
             <img
-              data-id={element.name}
+              data-id={index}
               src={element.image}
               key={index}
               className={element.name}
@@ -97,20 +106,83 @@ const Page2 = ({ phase, setPhase }) => {
                   getRight(`.${element.name}`) <= getRight("#bag")
                     ? bagPos.x
                     : element.left + "%",
-                // left: bagPos.x,
                 borderRadius: "50%",
-                transform: isGame ? `translate(0,5000px)` : `translate(0,0)`,
-                transition: isGame ? `transform 60s ease` : `transform 10000s ease`,
+                transform: isGame
+                  ? `translate(-50%,${window.innerHeight * 6}px)`
+                  : `translate(0,0)`,
+                transition: isGame
+                  ? `transform 50s ease`
+                  : `transform 100000s ease`,
               }}
             />
           );
         });
+  let overlay = (
+    <div
+      className={style.overlay}
+      style={{ display: phase === 5 ? "block" : "none" }}
+    >
+      <div className={style.bubble}>
+        <div className={style.sorry}></div>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
-    if (noId.length > 0) {
+    if (phase === 5) {
       setIsGame(false);
-      setPhase(phase + 1);
+      setBtnStyle(style.btnTry);
     }
-  }, [seconds, bagPos]);
+    
+  }, [phase]);
+  useEffect(()=>{
+      if (noId.length > 0) {
+        setPhase(5);
+      }
+     const timer = setTimeout(() => {
+      setSeconds(seconds + 1);
+    }, 1000);
+    return () => clearTimeout(timer); 
+  },[seconds]);
+  //   const phase5 = () => {
+  //     const timer = setInterval(() => {
+  //       setPhase(5);
+  //       setIsGame(true);
+
+  //     }, 1000);
+  //     return () => {
+  //       clearInterval(timer);
+  //     };
+  //   };
+
+  //   useEffect(() => {
+  //     if (phase === 3) {
+  //       slike = null;
+  //       setIsGame(false);
+  //     }
+  //     if (phase === 4) {
+  //       phase5();
+  //     }
+  //     if (phase === 5) {
+  //     //   setIsGame(true);
+  //       const interval = setInterval(() => {
+  //         setSeconds(seconds + 1);
+  //       }, 1000);
+  //         return () => {
+  //           clearInterval(interval);
+  //         }
+  //     }
+  //     if (phase === 6) {
+  //       setIsGame(false);
+  //     //   setSeconds(0);
+  //     }
+  //   }, [phase, seconds, bagPos]);
+  //   useEffect(() => {
+  //     if (noId.length > 0) {
+  //       setPhase(6);
+  //       setSeconds(0)
+  //     }
+  //   }, [seconds]);
   return (
     <div
       style={{
@@ -120,45 +192,54 @@ const Page2 = ({ phase, setPhase }) => {
         touchAction: "none",
       }}
     >
+      {/* {console.log(noId)} */}
+      {phase === 3  ? gameintro : null}
+      {overlay}
       <div
         style={{
-          width: "100%",
-          height: "96%",
-          marginInline: "auto",
-          //   border: "1px black solid",
           position: "relative",
-          overflowX: "visible",
-          overflowY: "hidden",
+          height: "96%",
+          overflow: "hidden",
         }}
       >
-        {slike}
-      </div>
-      <div style={{ position: "absolute", bottom: 0 }}>
         <div
-          {...bindBagPos()}
-          id="bag"
           style={{
+            width: "50%",
+            height: "100%",
+            marginLeft: "50%",
             position: "relative",
-            bottom: "0",
-            left: bagPos.x,
-            touchAction: "none",
-            userSelect: "none",
-            width: "40%",
-
-            // textAlign: "center",
+            overflow: " visible",
           }}
         >
-          <img
-            src="https://i.imgur.com/Yikjbp0.png"
+          {slike}
+        </div>
+      </div>
+      <div style={{ position: "absolute", bottom: 0 }}>
+        <div className={style.bag}>
+          <div
+            {...bindBagPos()}
+            id="bag"
             style={{
-              width: "100%",
-              userSelect: "none",
               position: "relative",
-              left: "0px",
+              bottom: "0",
+              left: bagPos.x,
+              touchAction: "none",
+              userSelect: "none",
+              width: "40%",
+
+              // textAlign: "center",
             }}
-          ></img>
-        </div>{" "}
-        <button onClick={handleBtn}>Start</button>
+          >
+            <img
+              src="https://i.imgur.com/Yikjbp0.png"
+              style={{
+                width: "100%",
+                userSelect: "none",
+              }}
+            ></img>
+          </div>
+        </div>
+        <button onClick={handleBtn} className={btnStyle}></button>
       </div>
     </div>
   );
