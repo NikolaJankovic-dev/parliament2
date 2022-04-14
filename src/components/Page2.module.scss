@@ -1,3 +1,109 @@
+.gameintro {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+}
+.bubble {
+  position: relative;
+  width: min(80%, 400px);
+  top: 30%;
+  aspect-ratio: 1/1;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("https://i.imgur.com/tHrkkQt.png");
+  background-size: auto 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: visible;
+  transition: all 1s ease;
+}
+.seamless {
+    position: absolute;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1/1;
+    background-image: url("https://i.imgur.com/AaqhSyW.png");
+    background-size:  90% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: visible;
+    animation: opacityy 2s ease;
+    animation-iteration-count: 1;
+    transition: all 1s ease;
+}
+.move {
+    position: relative;
+    width: 90%;
+    aspect-ratio: 1/1;
+    // top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-image: url("https://i.imgur.com/URY7uM9.png");
+    background-size: 80% auto;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+    animation: opacityy2 6s ease;
+    animation-iteration-count: 1;
+    // animation-delay: 2s;
+  }
+  .arrows {
+    position: relative;
+    width: 90%;
+    height: 20%;
+    // top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-image: url("https://i.imgur.com/TevAPpO.png");
+    background-size: 80% auto;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+    animation: opacityy 6s ease;
+    animation-iteration-count: 1;
+  }
+  .bag {
+      position: relative;
+      width: 100%;
+      left: 0%;
+    //   transform: translateX(-100%);
+      display: flex;
+      justify-content: center;
+       animation: moveX 5s ease-in;
+        animation-iteration-count: 1;
+
+  }
+  @keyframes moveX {
+      0% {
+        transform: translateX(-100%);
+      }
+        100% {
+            transform: translateX(0%);
+        }
+  }
+
+@keyframes opacityy {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes opacityy2 {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+    
+
 .images {
     transform: translate(0,0);
     transition: transform 60s ease;
@@ -6,3 +112,53 @@
     transform: translate(0,5000px);
     transition: transform 60s ease;
 }
+.btnNext,  .btnTry{
+    position: absolute;
+    width: 20%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: none;
+    bottom: 8%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 3s ease 3s;
+    background-image: url("https://i.imgur.com/8IqkSuR.png");
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .btnTry {
+    background-image: url("https://i.imgur.com/iHJV5l7.png");
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  .noBtn {
+      display: none;
+  }
+  
+  
+  .overlay {
+      position: absolute;
+      width: 100%;
+        height: 100%;
+        background-image: url('https://i.imgur.com/XlPRn3U.png');
+        z-index: 1;
+  }
+  .sorry {
+    position: absolute;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1/1;
+    background-image: url("https://i.imgur.com/7EG8iWo.png");
+    background-size:  70% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: visible;
+    // animation: opacityy 2s ease;
+    animation-iteration-count: 1;
+    transition: all 1s ease;
+  }
