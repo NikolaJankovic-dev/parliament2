@@ -8,11 +8,14 @@ function App() {
   const [page, setPage] = useState(<Page1 phase={phase} setPhase={setPhase}/>);
   let children = <Page1 phase={phase} setPhase={setPhase}/>;
   useEffect(() => {
-    if (phase < 3) {
+    if (phase < 3 ) {
       setPage(<Page1 phase={phase} setPhase={setPhase}/>);
     }
-    if (phase >= 3)   {
+    if (phase >= 3 || phase <= 5)   {
       setPage(<Page2 phase={phase} setPhase={setPhase}/>);
+    }
+    if (phase === 6) {
+      setPage(<Page1 phase={phase} setPhase={setPhase}/>);
     }
   },[phase]);
   

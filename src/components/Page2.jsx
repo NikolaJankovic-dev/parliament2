@@ -1,13 +1,12 @@
 import { useDrag } from "@use-gesture/react";
 import React, { useEffect, useState } from "react";
-import { useSpring, animated } from "react-spring";
+
 import { imagesArray } from "./images";
 import style from "./Page2.module.css";
 
 const Page2 = ({ phase, setPhase }) => {
   const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
   const [isGame, setIsGame] = useState(false);
-  const [intro, setIntro] = useState(true);
   const noId = [];
   const [seconds, setSeconds] = useState(0);
   const [btnStyle, setBtnStyle] = useState(style.btnNext);
@@ -22,7 +21,6 @@ const Page2 = ({ phase, setPhase }) => {
     if (phase === 3) {
       setPhase(4);
       setSeconds(0);
-      setIntro(false);
       setBtnStyle(style.noBtn);
       const timer = setTimeout(() => {
         setIsGame(true);
@@ -31,7 +29,7 @@ const Page2 = ({ phase, setPhase }) => {
     } else {
       setPhase(3);
       setIsGame(false);
-      setBtnStyle(style.btnNext)
+      setBtnStyle(style.btnNext);
     }
   };
 
@@ -81,6 +79,7 @@ const Page2 = ({ phase, setPhase }) => {
             getRight(`.${element.name}`) <= getRight(`#bag`)
           ) {
             noId.push(element);
+            // console.log(noId);
           } else if (
             index === lastImage &&
             getBottom(`.${element.name}`) > getTop(`#bag`)
@@ -98,12 +97,12 @@ const Page2 = ({ phase, setPhase }) => {
               style={{
                 position: "absolute",
                 width: element.width + "%",
-                bottom: `${(1 + index) * 15 + 80}%`,
+                bottom: `${(1 + index) * 15 + 90}%`,
                 left:
                   getBottom(`.${element.name}`) >
                     getHeigth("#bag") / 5 + getTop("#bag") &&
-                  getLeft(`.${element.name}`) >= getLeft("#bag") &&
-                  getRight(`.${element.name}`) <= getRight("#bag")
+                  getLeft(`.${element.name}`)+10 >= getLeft("#bag") &&
+                  getRight(`.${element.name}`) <= getRight("#bag")+10
                     ? bagPos.x
                     : element.left + "%",
                 borderRadius: "50%",
@@ -132,57 +131,21 @@ const Page2 = ({ phase, setPhase }) => {
     if (phase === 5) {
       setIsGame(false);
       setBtnStyle(style.btnTry);
+      const timer = setTimeout(() => {
+        setPhase(6)
+      }, 3000);
+      return () => clearTimeout(timer);
     }
-    
   }, [phase]);
-  useEffect(()=>{
-      if (noId.length > 0) {
-        setPhase(5);
-      }
-     const timer = setTimeout(() => {
+  useEffect(() => {
+    if (noId.length > 0) {
+      setPhase(5);
+    }
+    const timer = setTimeout(() => {
       setSeconds(seconds + 1);
-    }, 1000);
-    return () => clearTimeout(timer); 
-  },[seconds]);
-  //   const phase5 = () => {
-  //     const timer = setInterval(() => {
-  //       setPhase(5);
-  //       setIsGame(true);
-
-  //     }, 1000);
-  //     return () => {
-  //       clearInterval(timer);
-  //     };
-  //   };
-
-  //   useEffect(() => {
-  //     if (phase === 3) {
-  //       slike = null;
-  //       setIsGame(false);
-  //     }
-  //     if (phase === 4) {
-  //       phase5();
-  //     }
-  //     if (phase === 5) {
-  //     //   setIsGame(true);
-  //       const interval = setInterval(() => {
-  //         setSeconds(seconds + 1);
-  //       }, 1000);
-  //         return () => {
-  //           clearInterval(interval);
-  //         }
-  //     }
-  //     if (phase === 6) {
-  //       setIsGame(false);
-  //     //   setSeconds(0);
-  //     }
-  //   }, [phase, seconds, bagPos]);
-  //   useEffect(() => {
-  //     if (noId.length > 0) {
-  //       setPhase(6);
-  //       setSeconds(0)
-  //     }
-  //   }, [seconds]);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [seconds]);
   return (
     <div
       style={{
@@ -192,8 +155,17 @@ const Page2 = ({ phase, setPhase }) => {
         touchAction: "none",
       }}
     >
-      {/* {console.log(noId)} */}
-      {phase === 3  ? gameintro : null}
+        <img src="https://i.imgur.com/ZyJN2ed.png" className={style.countdown} style={{
+            position: "absolute",
+            width: "15%",
+            top: "2%",
+            right: "2%",
+            animationDuration: `20s`,
+            opacity: `${isGame ? 1 : 0}`,
+            transition: `opacity 1s ease`,
+            zIndex: `${isGame ? 1 : 0}`,
+        }}/>
+      {phase === 3 ? gameintro : null}
       {overlay}
       <div
         style={{
@@ -211,6 +183,7 @@ const Page2 = ({ phase, setPhase }) => {
             overflow: " visible",
           }}
         >
+            {/* {console.log(noId)} */}
           {slike}
         </div>
       </div>
@@ -226,8 +199,6 @@ const Page2 = ({ phase, setPhase }) => {
               touchAction: "none",
               userSelect: "none",
               width: "40%",
-
-              // textAlign: "center",
             }}
           >
             <img
@@ -238,9 +209,9 @@ const Page2 = ({ phase, setPhase }) => {
               }}
             ></img>
           </div>
-        </div>
-        <button onClick={handleBtn} className={btnStyle}></button>
+        </div>{" "}
       </div>
+      <button onClick={handleBtn} className={btnStyle}></button>
     </div>
   );
 };
