@@ -4,6 +4,32 @@
   height: 100%;
 }
 
+.countdown {
+  -webkit-animation-name: rotation;
+          animation-name: rotation;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 20s;
+          animation-duration: 20s;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .bubble {
   position: relative;
   width: min(80%, 400px);
@@ -55,9 +81,10 @@
 }
 
 .arrows {
-  position: relative;
+  position: absolute;
   width: 90%;
   height: 20%;
+  bottom: 4%;
   left: 50%;
   transform: translate(-50%, 0);
   background-image: url("https://i.imgur.com/TevAPpO.png");
@@ -153,7 +180,7 @@
   aspect-ratio: 1/1;
   border-radius: 50%;
   border: none;
-  bottom: 8%;
+  bottom: 4%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 3s ease 3s;
