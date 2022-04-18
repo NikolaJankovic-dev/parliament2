@@ -9,8 +9,6 @@
           animation-name: rotation;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
-  -webkit-animation-duration: 20s;
-          animation-duration: 20s;
 }
 
 @-webkit-keyframes rotation {
@@ -66,7 +64,7 @@
 
 .move {
   position: relative;
-  width: 90%;
+  width: min(90%, 400px);
   aspect-ratio: 1/1;
   left: 50%;
   transform: translate(-50%, 0);
@@ -176,7 +174,7 @@
 
 .btnNext, .btnTry {
   position: absolute;
-  width: 20%;
+  width: min(20%, 80px);
   aspect-ratio: 1/1;
   border-radius: 50%;
   border: none;

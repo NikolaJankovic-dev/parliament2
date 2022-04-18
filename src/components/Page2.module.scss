@@ -7,7 +7,7 @@
 .countdown {
     animation-name: rotation;
     animation-iteration-count: infinite;
-    animation-duration: 20s;
+    // animation-duration: 20s;
 }
 @keyframes rotation {
     from {
@@ -49,7 +49,7 @@
 }
 .move {
     position: relative;
-    width: 90%;
+    width: min(90%, 400px);
     aspect-ratio: 1/1;
     // top: 50%;
     left: 50%;
@@ -127,7 +127,8 @@
 }
 .btnNext,  .btnTry{
     position: absolute;
-    width: 20%;
+    width: min(20%, 80px);
+
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: none;

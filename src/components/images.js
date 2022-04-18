@@ -5,7 +5,7 @@ export function shuffle(array) {
   }
   return array;
 }
-const sizes = [30,35,40]
+const sizes = [2,2.5,3]
  
 const tabletCase = {
     name: 'tabletCase',
