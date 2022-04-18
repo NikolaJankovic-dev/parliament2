@@ -55,6 +55,11 @@ const Page2 = ({ phase, setPhase }) => {
     return res;
   };
 
+  const getWidth = (el) => {
+    let res = document.body.querySelector(el)?.getBoundingClientRect().width;
+    return res;
+    };
+
   let gameintro = (
     <div className={style.gameintro}>
       <div className={style.bubble}>
@@ -96,7 +101,7 @@ const Page2 = ({ phase, setPhase }) => {
               id={element.fit}
               style={{
                 position: "absolute",
-                width: element.width + "%",
+                width: getWidth(`#bag`) / `${element.width}`,
                 bottom: `${(1 + index) * 15 + 90}%`,
                 left:
                   getBottom(`.${element.name}`) >
@@ -187,7 +192,7 @@ const Page2 = ({ phase, setPhase }) => {
           {slike}
         </div>
       </div>
-      <div style={{ position: "absolute", bottom: 0 }}>
+      <div style={{ position: "absolute", bottom: 0, width:"100%" }}>
         <div className={style.bag}>
           <div
             {...bindBagPos()}
@@ -198,7 +203,7 @@ const Page2 = ({ phase, setPhase }) => {
               left: bagPos.x,
               touchAction: "none",
               userSelect: "none",
-              width: "40%",
+              width: "min(40%, 170px",
             }}
           >
             <img

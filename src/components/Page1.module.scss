@@ -7,7 +7,6 @@
 .bubble,
 .nobubble {
   position: relative;
-
   top: 30%;
   aspect-ratio: 1/1;
   left: 50%;
@@ -72,11 +71,12 @@
 .btnStart,
 .btnNext {
   position: absolute;
-  width: 20%;
+  width: min(20%, 80px);
+
   aspect-ratio: 1/1;
   border-radius: 50%;
   border: none;
-  bottom: 8%;
+  bottom: 4%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 3s ease 3s;
