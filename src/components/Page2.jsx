@@ -1,8 +1,9 @@
 import { useDrag } from "@use-gesture/react";
 import React, { useEffect, useState } from "react";
 
-import { imagesArray } from "./images";
+import { imagesArray } from "../helpers/images";
 import style from "./Page2.module.css";
+import bag from "../assets/images/bag.png"
 
 const Page2 = ({ phase, setPhase }) => {
   const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
@@ -94,6 +95,7 @@ const Page2 = ({ phase, setPhase }) => {
 
           return (
             <img
+            alt="objects"
               data-id={index}
               src={element.image}
               key={index}
@@ -102,7 +104,7 @@ const Page2 = ({ phase, setPhase }) => {
               style={{
                 position: "absolute",
                 width: getWidth(`#bag`) / `${element.width}`,
-                bottom: `${(1 + index) * 15 + 90}%`,
+                bottom: `${(1 + index) * 20 + 90}%`,
                 left:
                   getBottom(`.${element.name}`) >
                     getHeigth("#bag") / 5 + getTop("#bag") &&
@@ -115,7 +117,7 @@ const Page2 = ({ phase, setPhase }) => {
                   ? `translate(-50%,${window.innerHeight * 6}px)`
                   : `translate(0,0)`,
                 transition: isGame
-                  ? `transform 50s ease`
+                  ? `transform 90s ease`
                   : `transform 100000s ease`,
               }}
             />
@@ -141,7 +143,7 @@ const Page2 = ({ phase, setPhase }) => {
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [phase]);
+  }, [phase, setPhase]);
   useEffect(() => {
     if (noId.length > 0) {
       setPhase(5);
@@ -150,7 +152,7 @@ const Page2 = ({ phase, setPhase }) => {
       setSeconds(seconds + 1);
     }, 100);
     return () => clearTimeout(timer);
-  }, [seconds]);
+  }, [seconds, noId.length, setPhase]);
   return (
     <div
       style={{
@@ -160,7 +162,8 @@ const Page2 = ({ phase, setPhase }) => {
         touchAction: "none",
       }}
     >
-        <img src="https://i.imgur.com/ZyJN2ed.png" className={style.countdown} style={{
+            
+        <img src="https://i.imgur.com/ZyJN2ed.png" className={style.countdown} alt="countdown"  style={{
             position: "absolute",
             width: "15%",
             top: "2%",
@@ -207,7 +210,8 @@ const Page2 = ({ phase, setPhase }) => {
             }}
           >
             <img
-              src="https://i.imgur.com/Yikjbp0.png"
+            alt="bag"
+              src={bag}
               style={{
                 width: "100%",
                 userSelect: "none",
