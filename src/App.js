@@ -7,15 +7,14 @@ import Page3 from './components/Page3';
 function App() {
   const [phase, setPhase] = useState(0);
   const [page, setPage] = useState(<Page1 phase={phase} setPhase={setPhase}/>);
-  let children = <Page1 phase={phase} setPhase={setPhase}/>;
   useEffect(() => {
-    if (phase < 3 ) {
+    if (phase <= 3 ) {
       setPage(<Page1 phase={phase} setPhase={setPhase}/>);
     }
-    if (phase >= 3 && phase <= 5)   {
+    if (phase >= 4 && phase <= 6)   {
       setPage(<Page2 phase={phase} setPhase={setPhase}/>);
     }
-    if (phase > 5) {
+    if (phase > 6) {
       setPage(<Page3 phase={phase} setPhase={setPhase}/>);
     }
   },[phase]);

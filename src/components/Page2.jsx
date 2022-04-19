@@ -20,9 +20,9 @@ const Page2 = ({ phase, setPhase }) => {
   });
 
   const handleBtn = () => {
-    if (phase === 3) {
+    if (phase === 4) {
       setObjects(shuffle(images))
-      setPhase(4);
+      setPhase(5);
       setSeconds(0);
       setBtnStyle(style.noBtn);
       const timer = setTimeout(() => {
@@ -30,7 +30,7 @@ const Page2 = ({ phase, setPhase }) => {
       }, 1000);
       return () => clearTimeout(timer);
     } else {
-      setPhase(3);
+      setPhase(4);
       setIsGame(false);
       setObjects(shuffle(images))
       setBtnStyle(style.btnNext);
@@ -75,7 +75,7 @@ const Page2 = ({ phase, setPhase }) => {
   );
 
   let slike =
-    phase === 3
+    phase === 4
       ? null
       : objects?.map((element, index) => {
           const lastImage = images.length - 1;
@@ -129,7 +129,7 @@ const Page2 = ({ phase, setPhase }) => {
   let overlay = (
     <div
       className={style.overlay}
-      style={{ display: phase === 5 ? "block" : "none" }}
+      style={{ display: phase === 6 ? "block" : "none" }}
     >
       <div className={style.bubble}>
         <div className={style.sorry}></div>
@@ -138,18 +138,18 @@ const Page2 = ({ phase, setPhase }) => {
   );
 
   useEffect(() => {
-    if (phase === 5) {
+    if (phase === 6) {
       setIsGame(false);
       setBtnStyle(style.btnTry);
       const timer = setTimeout(() => {
-        setPhase(6)
+        setPhase(7)
       }, 3000);
       return () => clearTimeout(timer);
     }
   }, [phase, setPhase]);
   useEffect(() => {
     if (noId.length > 0) {
-      setPhase(5);
+      setPhase(6);
     }
     const timer = setTimeout(() => {
       setSeconds(seconds + 1);
@@ -176,7 +176,7 @@ const Page2 = ({ phase, setPhase }) => {
             transition: `opacity 1s ease`,
             zIndex: `${isGame ? 1 : 0}`,
         }}/>
-      {phase === 3 ? gameintro : null}
+      {phase === 4 ? gameintro : null}
       {overlay}
       <div
         style={{
