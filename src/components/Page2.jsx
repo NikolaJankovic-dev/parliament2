@@ -18,6 +18,7 @@ const Page2 = ({ phase, setPhase }) => {
       y: params.offset[1],
     });
   });
+ 
 
   const handleBtn = () => {
     if (phase === 4) {
@@ -81,9 +82,9 @@ const Page2 = ({ phase, setPhase }) => {
           const lastImage = images.length - 1;
           if (
             element.fit === "no" &&
-            getBottom(`.${element.name}`) > getTop(`#bag`) &&
+            getBottom(`.${element.name}`) > getHeigth("#bag") / 5 + getTop('#bag') &&
             getTop(`.${element.name}`) <
-              getTop(`#bag`) + getHeigth("#bag") / 4 &&
+              getTop(`#bag`) + getHeigth("#bag") / 5 &&
             getLeft(`.${element.name}`) >= getLeft(`#bag`) &&
             getRight(`.${element.name}`) <= getRight(`#bag`)
           ) {
@@ -98,6 +99,7 @@ const Page2 = ({ phase, setPhase }) => {
 
           return (
             <img
+            // {...bindObjPos()}
             alt="objects"
               data-id={index}
               src={element.image}
@@ -114,14 +116,17 @@ const Page2 = ({ phase, setPhase }) => {
                   getLeft(`.${element.name}`)+10 >= getLeft("#bag") &&
                   getRight(`.${element.name}`) <= getRight("#bag")+10
                     ? bagPos.x
-                    : element.left + "%",
+                    : element.left + "px",
                 borderRadius: "50%",
                 transform: isGame
                   ? `translate(-50%,${window.innerHeight * 6}px)`
                   : `translate(0,0)`,
+                  transformOrigin: "center",
                 transition: isGame
                   ? `transform 90s ease`
                   : `transform 100000s ease`,
+              userSelect: "none",
+
               }}
             />
           );
@@ -201,7 +206,9 @@ const Page2 = ({ phase, setPhase }) => {
       <div style={{ position: "absolute", bottom: 0, width:"100%" }}>
         <div className={style.bag}>
           <div
+            // {...bindObjPos()}
             {...bindBagPos()}
+
             id="bag"
             style={{
               position: "relative",
@@ -211,7 +218,7 @@ const Page2 = ({ phase, setPhase }) => {
               userSelect: "none",
               width: "min(40%, 170px",
             }}
-          >
+          > 
             <img
             alt="bag"
               src={bag}
