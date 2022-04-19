@@ -228,6 +228,5 @@ const coffeeObj = {
     fit: 'yes'
 }
 
- const images = [tabletCaseObj, heelsObj, glassesObj, phoneObj, lampObj, coatObj, flowersObj, earphonesObj, headphonesObj, bedObj, dogObj, chairObj, tenisObj, pillowObj, catObj, bookObj, notebookObj, lipstickObj, sneakersObj, carObj, perfumeObj, keysObj, cupcakeObj, gramophoneObj, coffeeMakerObj, bunnyObj, coffeeObj];
-export const imagesArray = shuffle(images);
+export  const images = [tabletCaseObj, heelsObj, glassesObj, phoneObj, lampObj, coatObj, flowersObj, earphonesObj, headphonesObj, bedObj, dogObj, chairObj, tenisObj, pillowObj, catObj, bookObj, notebookObj, lipstickObj, sneakersObj, carObj, perfumeObj, keysObj, cupcakeObj, gramophoneObj, coffeeMakerObj, bunnyObj, coffeeObj];
 // export shuffle;
