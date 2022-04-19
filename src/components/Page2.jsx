@@ -1,13 +1,14 @@
 import { useDrag } from "@use-gesture/react";
 import React, { useEffect, useState } from "react";
 
-import { imagesArray } from "../helpers/images";
+import { images, shuffle } from "../helpers/images";
 import style from "./Page2.module.css";
 import bag from "../assets/images/bag.png"
 
 const Page2 = ({ phase, setPhase }) => {
   const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
   const [isGame, setIsGame] = useState(false);
+  const [objects, setObjects] = useState([])
   const noId = [];
   const [seconds, setSeconds] = useState(0);
   const [btnStyle, setBtnStyle] = useState(style.btnNext);
@@ -20,6 +21,7 @@ const Page2 = ({ phase, setPhase }) => {
 
   const handleBtn = () => {
     if (phase === 3) {
+      setObjects(shuffle(images))
       setPhase(4);
       setSeconds(0);
       setBtnStyle(style.noBtn);
@@ -30,6 +32,7 @@ const Page2 = ({ phase, setPhase }) => {
     } else {
       setPhase(3);
       setIsGame(false);
+      setObjects(shuffle(images))
       setBtnStyle(style.btnNext);
     }
   };
@@ -74,8 +77,8 @@ const Page2 = ({ phase, setPhase }) => {
   let slike =
     phase === 3
       ? null
-      : imagesArray?.map((element, index) => {
-          const lastImage = imagesArray.length - 1;
+      : objects?.map((element, index) => {
+          const lastImage = images.length - 1;
           if (
             element.fit === "no" &&
             getBottom(`.${element.name}`) > getTop(`#bag`) &&
