@@ -5,7 +5,7 @@ const Page3 = ({phase, setPhase}) => {
     const [msg1, setMsg1] = useState(style.msg1);
     const [msg2, setMsg2] = useState(style.msg2);
     useEffect(()=>{
-        if(phase < 10){
+        if(phase < 11){
             setMsg1(style.msg1);
             setMsg2(style.msg2);
             const timer = setTimeout(()=>{
@@ -25,21 +25,21 @@ const Page3 = ({phase, setPhase}) => {
             setMsg1(style.msg13);
             setMsg2(style.msg23);
         }
-    }, [phase]);
+    }, [phase, setPhase]);
   return (
     <div className={style.page3}>
-      <div className={msg1} style={{opacity: phase > 6 && phase < 11  || phase > 11 ? 1 : 0}}></div>
-      <div className={phase === 6 ? style.nobubble : style.bubble}>
-        <div className={style.pack1} style={{opacity: phase === 7 ? 1 : 0}}></div>
-        <div className={style.pack2} style={{opacity: phase === 8 ? 1 : 0}}></div>
-        <div className={style.pack3} style={{opacity: phase === 9 ? 1 : 0}}></div>
-        <div className={style.pack4} style={{opacity: phase === 10 ? 1 : 0}}></div>
-        <div className={style.pack5} style={{opacity: phase === 11 ? 1 : 0}}></div>
+      <div className={msg1} style={{opacity: phase > 7 && phase < 12  || phase > 12 ? 1 : 0}}></div>
+      <div className={style.bubble}>
+        <div className={style.pack1} style={{opacity: phase === 8 ? 1 : 0}}></div>
+        <div className={style.pack2} style={{opacity: phase === 9 ? 1 : 0}}></div>
+        <div className={style.pack3} style={{opacity: phase === 10 ? 1 : 0}}></div>
+        <div className={style.pack4} style={{opacity: phase === 11 ? 1 : 0}}></div>
+        <div className={style.pack5} style={{opacity: phase === 12 ? 1 : 0}}></div>
       </div>
       <div className={msg2}>
-          <div style={{opacity: phase > 9 && phase < 11 || phase > 11 ? 1 : 0}}></div>
+          <div style={{opacity: phase > 10 && phase < 12 || phase > 12 ? 1 : 0}}></div>
          
-      </div> <button className={style.btnL} onClick={()=>setPhase(phase+1)}  style={{opacity: phase > 9 ? 1 : 0} }></button>
+      </div> <button className={style.btnL} onClick={()=>setPhase(phase+1)}  style={{opacity: phase > 10 ? 1 : 0} }></button>
     </div>
   );
 };
