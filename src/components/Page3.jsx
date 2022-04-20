@@ -19,15 +19,15 @@ const Page3 = ({phase, setPhase}) => {
             }, 3000)
             return ()=>clearTimeout(timer);
         }
-        if (phase === 12) {
+        if (phase === 13) {
             setMsg1(style.msg11);
             setMsg2(style.msg21);
         }
-        if (phase === 13) {
+        if (phase === 14) {
             setMsg1(style.msg12);
             setMsg2(style.msg22);
         }
-        if (phase === 14) {
+        if (phase === 15) {
             setMsg1(style.msg13);
             setMsg2(style.msg23);
         }
@@ -44,23 +44,17 @@ const Page3 = ({phase, setPhase}) => {
         <div className={style.video1} style={{opacity: phase === 13 ? 1 : 0}}>
         <video src={Video1} controls={false} autoPlay loop muted type="video/mp4" style={{
         height: "100%",
-        // width: 300
       }}/>\
-        <div className={style.videoOverlay1}></div>
         </div>
         <div className={style.video2} style={{opacity: phase === 14 ? 1 : 0}}>
         <video src={Video2} controls={false} autoPlay loop muted type="video/mp4" style={{
         height: "100%",
-        // width: 300
       }}/>\
-        <div className={style.videoOverlay}></div>
         </div>
         <div className={style.video3} style={{opacity: phase === 15 ? 1 : 0}}>
         <video src={Video3} controls={false} autoPlay loop muted type="video/mp4" style={{
         width: "100%",
-        // width: 300
-      }}/>\
-        <div className={style.videoOverlay3}></div>
+      }}/>
         </div>
         
 
