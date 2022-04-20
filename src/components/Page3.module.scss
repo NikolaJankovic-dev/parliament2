@@ -118,6 +118,69 @@
   background-repeat: no-repeat;
   transition: all 1s ease;
 }
+.video1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  video {
+    filter: brightness(1.1);
+  }
+}
+.videoOverlay1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(14, 98, 167, 0.356);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease;
+}
+.video2 {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  
+  // video {
+  //   filter: brightness(1.1);
+  // }
+}
+.video3 {
+  // position: absolute;
+  // top: 50%;
+  // left: 40%;
+  // transform: translate(-50%, -50%);
+  top: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  
+   video {
+     filter: brightness(1.1);
+   }
+}
+.videoOverlay3 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(52, 139, 209, 0.247);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease;
+}
 .msg2,
 .msg21,
 .msg22,
@@ -151,9 +214,10 @@
 .msg22 {
   div {
     height: 50%;
+    aspect-ratio: 1/1;
     background-image: url("https://i.imgur.com/sjge55n.png");
     background-size: 90% auto;
-    background-position: center top;
+    background-position: center 20%;
     background-repeat: no-repeat;
     transition: all 1s ease;
   }
@@ -161,9 +225,10 @@
 .msg23 {
   div {
     height: 50%;
+    aspect-ratio: 1/1;
     background-image: url("https://i.imgur.com/8vKybx9.png");
     background-size: 90% auto;
-    background-position: center top;
+    background-position: center 20%;
     background-repeat: no-repeat;
     transition: all 1s ease;
   }

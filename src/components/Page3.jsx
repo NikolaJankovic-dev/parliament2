@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import style from "./Page3.module.css";
+import Video1 from "../assets/videos/Video1.mp4";
+import Video2 from "../assets/videos/Video2.mp4";
+import Video3 from "../assets/videos/Video3.mp4";
+
+
+
 
 const Page3 = ({phase, setPhase}) => {
     const [msg1, setMsg1] = useState(style.msg1);
@@ -35,6 +41,30 @@ const Page3 = ({phase, setPhase}) => {
         <div className={style.pack3} style={{opacity: phase === 10 ? 1 : 0}}></div>
         <div className={style.pack4} style={{opacity: phase === 11 ? 1 : 0}}></div>
         <div className={style.pack5} style={{opacity: phase === 12 ? 1 : 0}}></div>
+        <div className={style.video1} style={{opacity: phase === 13 ? 1 : 0}}>
+        <video src={Video1} controls={false} autoPlay loop muted type="video/mp4" style={{
+        height: "100%",
+        // width: 300
+      }}/>\
+        <div className={style.videoOverlay1}></div>
+        </div>
+        <div className={style.video2} style={{opacity: phase === 14 ? 1 : 0}}>
+        <video src={Video2} controls={false} autoPlay loop muted type="video/mp4" style={{
+        height: "100%",
+        // width: 300
+      }}/>\
+        <div className={style.videoOverlay}></div>
+        </div>
+        <div className={style.video3} style={{opacity: phase === 15 ? 1 : 0}}>
+        <video src={Video3} controls={false} autoPlay loop muted type="video/mp4" style={{
+        width: "100%",
+        // width: 300
+      }}/>\
+        <div className={style.videoOverlay3}></div>
+        </div>
+        
+
+
       </div>
       <div className={msg2}>
           <div style={{opacity: phase > 10 && phase < 12 || phase > 12 ? 1 : 0}}></div>
