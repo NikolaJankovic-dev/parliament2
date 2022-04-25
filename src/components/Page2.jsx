@@ -7,10 +7,11 @@ import bag from "../assets/images/bag.png"
 
 const Page2 = ({ phase, setPhase }) => {
   const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
+  const [currentPos, setCurrentPos] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const [objects, setObjects] = useState([])
   const noId = [];
-  const [seconds, setSeconds] = useState(0);
+  // const [seconds, setSeconds] = useState(0);
   const [btnStyle, setBtnStyle] = useState(style.btnNext);
   const bindBagPos = useDrag((params) => {
     setBagPos({
@@ -24,7 +25,7 @@ const Page2 = ({ phase, setPhase }) => {
     if (phase === 4) {
       setObjects(shuffle(images))
       setPhase(5);
-      setSeconds(0);
+      // setSeconds(0);
       setBtnStyle(style.noBtn);
       const timer = setTimeout(() => {
         setIsGame(true);
@@ -131,6 +132,14 @@ const Page2 = ({ phase, setPhase }) => {
             />
           );
         });
+        useEffect(() => {
+          if (getBottom(`[data-id="0"]`) >
+          getHeigth("#bag") / 5 + getTop("#bag") &&
+        getLeft(`[data-id="0"]`)+10 >= getLeft("#bag") &&
+        getRight(`[data-id="0"]`) <= getRight("#bag")+10){
+          setCurrentPos(bagPos.x)
+        }
+        },[bagPos.x]);
   let overlay = (
     <div
       className={style.overlay}
@@ -156,11 +165,11 @@ const Page2 = ({ phase, setPhase }) => {
     if (noId.length > 0) {
       setPhase(6);
     }
-    const timer = setTimeout(() => {
-      setSeconds(seconds + 1);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [seconds, noId.length, setPhase]);
+    // const timer = setTimeout(() => {
+    //   setSeconds(seconds + 1);
+    // }, 100);
+    // return () => clearTimeout(timer);
+  }, [ noId.length, setPhase]);
   return (
     <div
       style={{
