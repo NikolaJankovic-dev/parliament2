@@ -99,8 +99,6 @@
   position: relative;
   width: 100%;
   left: 0%;
-  display: flex;
-  justify-content: center;
   -webkit-animation: moveX 3s ease-in;
           animation: moveX 3s ease-in;
   -webkit-animation-iteration-count: 1;

@@ -1,4 +1,4 @@
-import { useDrag } from "@use-gesture/react";
+// import { useDrag } from "@use-gesture/react";
 import React, { useEffect, useState } from "react";
 
 import { images, shuffle } from "../helpers/images";
@@ -6,26 +6,31 @@ import style from "./Page2.module.css";
 import bag from "../assets/images/bag.png"
 
 const Page2 = ({ phase, setPhase }) => {
-  const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
+  const [pointerPosition, setPointerPosition] = useState({ x: window.innerWidth/2, y: 0 });
+  // const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const [objects, setObjects] = useState([])
   const noId = [];
-  // const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const [btnStyle, setBtnStyle] = useState(style.btnNext);
-  const bindBagPos = useDrag((params) => {
-    setBagPos({
-      x: params.offset[0],
-      y: params.offset[1],
-    });
-  });
+
+  const handlePointerMove = (event) => {
+    setPointerPosition({ x: event.clientX, y: event.clientY });
+  };
+  // const bindBagPos = useDrag((params) => {
+  //   setBagPos({
+  //     x: params.offset[0],
+  //     y: params.offset[1],
+  //   });
+  // });
  
 
   const handleBtn = () => {
     if (phase === 4) {
       setObjects(shuffle(images))
       setPhase(5);
-      // setSeconds(0);
+      setSeconds(0);
       setBtnStyle(style.noBtn);
       const timer = setTimeout(() => {
         setIsGame(true);
@@ -110,21 +115,24 @@ const Page2 = ({ phase, setPhase }) => {
               style={{
                 position: "absolute",
                 width: getWidth(`#bag`) / `${element.width}`,
-                bottom: `${(1 + index) * 20 + 90}%`,
+                bottom: `${(1 + index) * getHeigth('#bag')+window.innerHeight}px`,
                 left:
-                  getBottom(`.${element.name}`) >
-                    getHeigth("#bag") / 5 + getTop("#bag") &&
-                  getLeft(`.${element.name}`)+10 >= getLeft("#bag") &&
-                  getRight(`.${element.name}`) <= getRight("#bag")+10
-                    ? bagPos.x
-                    : element.left + "px",
+                  // getBottom(`.${element.name}`) >
+                  //   getHeigth("#bag") / 5 + getTop("#bag") &&
+                  // getLeft(`.${element.name}`)+10 >= getLeft("#bag") &&
+                  // getRight(`.${element.name}`) <= getRight("#bag")+10
+                  //   ? pointerPosition.x - currentPos + element.left
+                  //   :
+                  getBottom(`.${element.name}`) > getTop(`#bag`) && getLeft(`.${element.name}`) >= getLeft(`#bag`) && getRight(`.${element.name}`) <= getRight(`#bag`)
+                   ? pointerPosition.x - currentPos + element.left : element.left,
+                    //  element.left + "px",
                 borderRadius: "50%",
                 transform: isGame
                   ? `translate(-50%,${window.innerHeight * 6}px)`
                   : `translate(0,0)`,
                   transformOrigin: "center",
                 transition: isGame
-                  ? `transform 90s ease`
+                  ? `transform 90s`
                   : `transform 100000s ease`,
               userSelect: "none",
 
@@ -133,13 +141,29 @@ const Page2 = ({ phase, setPhase }) => {
           );
         });
         useEffect(() => {
-          if (getBottom(`[data-id="0"]`) >
-          getHeigth("#bag") / 5 + getTop("#bag") &&
-        getLeft(`[data-id="0"]`)+10 >= getLeft("#bag") &&
-        getRight(`[data-id="0"]`) <= getRight("#bag")+10){
-          setCurrentPos(bagPos.x)
+          for (let i = 0; i < images.length; i++) {
+            
+          if (getBottom(`[data-id="${i}"]`) >  getTop(`#bag`) - 2 &&
+          getBottom(`[data-id="${i}"]`) <
+          getTop(`#bag`))
+            //  &&
+          // getLeft(`[data-id="${i}"]`) >= getLeft(`#bag`) &&
+          // getRight(`[data-id="${i}"]`) <= getRight(`#bag`))
+          {
+          setCurrentPos(pointerPosition.x)
+          }
         }
-        },[bagPos.x]);
+        });
+        // useEffect(() => {
+        //   if (getBottom(`[data-id="1"]`) > getHeigth("#bag") / 5 + getTop('#bag') &&
+        //   getTop(`[data-id="1"]`) <
+        //     getTop(`#bag`) + getHeigth("#bag") / 5 &&
+        //   getLeft(`[data-id="1"]`) >= getLeft(`#bag`) &&
+        //   getRight(`[data-id="1"]`) <= getRight(`#bag`)){
+        //   setCurrentPos(pointerPosition.x)
+        // }
+
+        // },[pointerPosition.x]);
   let overlay = (
     <div
       className={style.overlay}
@@ -165,11 +189,11 @@ const Page2 = ({ phase, setPhase }) => {
     if (noId.length > 0) {
       setPhase(6);
     }
-    // const timer = setTimeout(() => {
-    //   setSeconds(seconds + 1);
-    // }, 100);
-    // return () => clearTimeout(timer);
-  }, [ noId.length, setPhase]);
+    const timer = setTimeout(() => {
+       setSeconds(seconds + 1);
+     }, 100);
+     return () => clearTimeout(timer);
+  }, [seconds, noId.length, setPhase]);
   return (
     <div
       style={{
@@ -201,9 +225,9 @@ const Page2 = ({ phase, setPhase }) => {
       >
         <div
           style={{
-            width: "50%",
+            width: "100%",
             height: "100%",
-            marginLeft: "50%",
+            // marginLeft: "50%",
             position: "relative",
             overflow: " visible",
           }}
@@ -214,29 +238,36 @@ const Page2 = ({ phase, setPhase }) => {
       </div>
       <div style={{ position: "absolute", bottom: 0, width:"100%" }}>
         <div className={style.bag}>
-          <div
+          {/* <div
             // {...bindObjPos()}
-            {...bindBagPos()}
-
+            // {...bindBagPos()}
             id="bag"
             style={{
               position: "relative",
               bottom: "0",
-              left: bagPos.x,
+              left: pointerPosition.x,
               touchAction: "none",
               userSelect: "none",
               width: "min(40%, 170px",
             }}
-          > 
+          >  */}
             <img
             alt="bag"
+            id="bag"
+
+            onPointerMove={handlePointerMove}
               src={bag}
               style={{
-                width: "100%",
-                userSelect: "none",
+                position: "relative",
+              bottom: "0",
+              left: pointerPosition.x,
+              touchAction: "none",
+              userSelect: "none",
+              width: "min(40%, 170px",
+              transform: "translate(-50%,0)",
               }}
             ></img>
-          </div>
+          {/* </div> */}
         </div>{" "}
       </div>
       <button onClick={handleBtn} className={btnStyle}></button>

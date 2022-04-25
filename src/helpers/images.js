@@ -40,189 +40,189 @@ const tabletCaseObj = {
     name: 'tabletCase',
     image: tabletcase,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const heelsObj = {
     name: 'heels',
     image: heels,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * ((window.innerWidth - (window.innerWidth/3))),
     fit: 'no'
 }
 const glassesObj = {
     name: 'glasses',
     image: glasses,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const phoneObj = {
     name: 'phone',
     image: phone,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const lampObj = {
     name: 'lamp',
     image: lamp,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const coatObj = {
     name: 'coat',
     image: coat,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const flowersObj = {
     name: 'flowers',
     image: flowers,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const earphonesObj = {
     name: 'earphones',
     image: earphones,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const headphonesObj =  {
     name: 'headphones',
     image: headphones,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const bedObj = {
     name: 'bed',
     image: bed,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const dogObj = {
     name: 'dog',
     image: dog,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const chairObj = {
     name: 'chair',
     image: chair,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const tenisObj = {
     name: "tenis",
     image: tenis,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const pillowObj = {
     name: 'pillow',
     image: pillow,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const catObj = {
     name: 'cat',
     image: cat,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const bookObj = {
     name: 'book',
     image: book,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const notebookObj = {
     name: 'notebook',
     image: notebook,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const lipstickObj = {
     name: 'lipstick',
     image: lipstick,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const sneakersObj = {
     name: 'sneakers',
     image: sneakers,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const carObj = {
     name: 'car',
     image: car,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const perfumeObj = {
     name: 'perfume',
     image: perfume,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const keysObj = {
     name: 'keys',
     image: keys,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const cupcakeObj = {
     name: 'cupcake',
     image: cupcake,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const gramophoneObj = {
     name: 'gramophone',
     image: gramophone,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'no'
 }
 const coffeeMakerObj = {
     name: 'coffeeMaker',
     image: coffeeMaker,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const bunnyObj = {
     name: 'bunny',
     image: bunny,
     width: shuffle(sizes)[0],
-    left: Math.random() * 50,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 const coffeeObj = {
     name: 'coffee',
     image: coffee,
     width: shuffle(sizes)[0],
-    left: Math.random() * -60,
+    left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
     fit: 'yes'
 }
 
