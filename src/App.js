@@ -3,6 +3,7 @@ import Page1 from './components/Page1';
 import {useEffect, useState} from 'react';
 import Page2 from './components/Page2';
 import Page3 from './components/Page3';
+import Page2t from './components/Page2t';
 
 function App() {
   const [phase, setPhase] = useState(0);

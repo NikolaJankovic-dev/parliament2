@@ -3,23 +3,23 @@ import React, { useEffect, useState } from "react";
 
 import { images, shuffle } from "../helpers/images";
 import style from "./Page2.module.css";
-import bag from "../assets/images/bag.png";
+// import bag from "../assets/images/bag.png";
+import bagfront from "../assets/images/bagfront.png";
+import bagend from "../assets/images/bagend.png";
 
 const Page2 = ({ phase, setPhase }) => {
-  const [pointerPosition, setPointerPosition] = useState({
-    x: window.innerWidth / 2,
-    y: 0,
-  });
+  const [pointerPosition, setPointerPosition] = useState(window.innerWidth / 2);
   // const [bagPos, setBagPos] = useState({ x: 0, y: 0 });
   const [currentPos, setCurrentPos] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const [objects, setObjects] = useState([]);
+  const [touching, setTouching] = useState(0);
   const noId = [];
   const [seconds, setSeconds] = useState(0);
   const [btnStyle, setBtnStyle] = useState(style.btnNext);
 
   const handlePointerMove = (event) => {
-    setPointerPosition({ x: event.clientX, y: event.clientY });
+    setPointerPosition(event.clientX);
   };
   // const bindBagPos = useDrag((params) => {
   //   setBagPos({
@@ -87,78 +87,167 @@ const Page2 = ({ phase, setPhase }) => {
     phase === 4
       ? null
       : objects?.map((element, index) => {
-          const lastImage = images.length - 1;
-          if (
-            element.fit === "no" &&
-            getBottom(`.${element.name}`) >
-              getHeigth("#bag") / 4 + getTop("#bag") &&
-            getTop(`.${element.name}`) <
-              getTop(`#bag`) + getHeigth("#bag") / 4  - getHeigth(`.${element.name}`)/2 &&
-            getLeft(`.${element.name}`) >= getLeft(`#bag`) &&
-            getRight(`.${element.name}`) <= getRight(`#bag`)
-          ) {
-            noId.push(element);
-            // console.log(noId);
-          } else if (
-            index === lastImage &&
-            getBottom(`.${element.name}`) > getTop(`#bag`)
-          ) {
-            noId.push(element);
-          }
+          // const lastImage = images.length - 1;
+          // if (
+          //   element.fit === "no" &&
+          //   getBottom(`.${element.name}`) >
+          //     getHeigth("#bag") / 4 + getTop("#bag") &&
+          //   getTop(`.${element.name}`) <
+          //     getTop(`#bag`) + getHeigth("#bag") / 4  - getHeigth(`.${element.name}`)/2 &&
+          //   getLeft(`.${element.name}`) >= getLeft(`#bag`) &&
+          //   getRight(`.${element.name}`) <= getRight(`#bag`)
+          // ) {
+          //   noId.push(element);
+          //   // console.log(noId);
+          // }
+          // // if (
+          // //   element.fit === "yes" &&
+          // //   getBottom(`.${element.name}`) >
+          // //     getHeigth("#bag") / 4 + getTop("#bag") &&
+          // //     getBottom(`.${element.name}`) <
+          // //     getHeigth("#bag") / 4 + getTop("#bag") +2 &&
+          // //   // getTop(`.${element.name}`) <
+          // //   //   getTop(`#bag`) + getHeigth("#bag") / 4  - getHeigth(`.${element.name}`)/2 &&
+          // //   getLeft(`.${element.name}`) >= getLeft(`#bag`) &&
+          // //   getRight(`.${element.name}`) <= getRight(`#bag`)
+          // // ) {
+          // //   setYesId(yesId+1)
+          // //    console.log(yesId);
+          // // }
+
+          // else if (
+          //   index === lastImage &&
+          //   getBottom(`.${element.name}`) > getTop(`#bag`)
+          // ) {
+          //   noId.push(element);
+          // }
 
           return (
-            <img
-              // {...bindObjPos()}
-              alt="objects"
-              data-id={index}
-              src={element.image}
+            <div
+              data-id = {index}
               key={index}
               className={element.name}
               id={element.fit}
               style={{
-                position: "absolute",
+                position: "relative",
                 width: getWidth(`#bag`) / `${element.width}`,
+                height: getWidth(`#bag`) / `${element.width}`,
+                left: element.left,
                 bottom: `${
-                  (2 + index) *( getHeigth("#bag") + 50)+ window.innerHeight/2
+                  (2 + index) * (getHeigth("#bag") + 50) +
+                  window.innerHeight / 2
                 }px`,
-                left:
-                  // getBottom(`.${element.name}`) >
-                  //   getHeigth("#bag") / 5 + getTop("#bag") &&
-                  // getLeft(`.${element.name}`)+10 >= getLeft("#bag") &&
-                  // getRight(`.${element.name}`) <= getRight("#bag")+10
-                  //   ? pointerPosition.x - currentPos + element.left
-                  //   :
-                  getTop(`.${element.name}`) > getHeigth("#bag") / 4 + getTop("#bag") &&
-                  // getBottom(`.${element.name}`) < getTop(`#bag`) &&
-                  getLeft(`.${element.name}`) >= getLeft(`#bag`) &&
-                  getRight(`.${element.name}`) <= getRight(`#bag`)
-                    ? pointerPosition.x - currentPos + element.left
-                    : element.left,
-                //  element.left + "px",
-                borderRadius: "50%",
                 transform: isGame
                   ? `translate(-50%,${window.innerHeight * 12}px)`
                   : `translate(0,0)`,
                 transformOrigin: "center",
-                transition: isGame ? `transform 120s linear` : `transform 100000s ease`,
+                transition: isGame
+                  ? `transform 120s linear`
+                  : `transform 100000s ease`,
                 userSelect: "none",
               }}
-            />
+            >
+              <img
+                // {...bindObjPos()}
+                alt="objects"
+                data-id={index}
+                src={element.image}
+                style={{
+                  position: "absolute",
+                  // border: "50px solid rgba(0,0,0,0.5)",
+
+                  width: "100%",
+
+                  // left:
+                  //   // getBottom(`.${element.name}`) >
+                  //   //   getHeigth("#bag") / 5 + getTop("#bag") &&
+                  //   // getLeft(`.${element.name}`)+10 >= getLeft("#bag") &&
+                  //   // getRight(`.${element.name}`) <= getRight("#bag")+10
+                  //   //   ? pointerPosition.x - currentPos + element.left
+                  //   //   :
+                  //   getTop(`.${element.name}`) > getHeigth("#bag") / 4 + getTop("#bag") &&
+                  //   // getBottom(`.${element.name}`) < getTop(`#bag`) &&
+                  //   getLeft(`.${element.name}`) >= getLeft(`#bag`) &&
+                  //   getRight(`.${element.name}`) <= getRight(`#bag`)
+                  //     ? pointerPosition.x - currentPos + element.left
+                  //     : element.left,
+                  //  element.left + "px",
+                  // borderRadius: "50%",
+                }}
+              />
+            </div>
           );
         });
+
+  useEffect(() => {
+  let yesId = "";
+
+    [].forEach.call(
+      document.body?.querySelector(`#holder`)?.children,
+      (element) => {
+        // console.log(element.attributes.getNamedItem("class").value)
+  let test = ""
+
+        if (
+          getBottom(
+            `.${element.attributes.getNamedItem("class").value}`
+          ) > getTop(`#bag`) &&
+          getTop(
+            `.${element.attributes.getNamedItem("class").value}`
+          ) <
+            getTop(`#bag`) +
+              getHeigth(
+                `.${element.attributes.getNamedItem("class").value}`
+              ) &&
+          getLeft(
+            `.${element.attributes.getNamedItem("class").value}`
+          ) >= getLeft(`#bag`) &&
+          getRight(
+            `.${element.attributes.getNamedItem("class").value}`
+          ) <= getRight(`#bag`)
+        ) {
+          console.log(element.attributes.getNamedItem("class").value);
+          // element.style.zIndex = "11";
+          if (element.attributes.getNamedItem("id").value === "no") {
+            // element.style.zIndex = "10";
+            element.style.transform = `translate(-50000px,${window.innerHeight * 12}px) `;
+          }
+          if (element.attributes.getNamedItem("id").value === "yes" && !touching) {
+            element.style.left = pointerPosition - currentPos + element.left;
+            yesId += (yesId + (element.attributes.getNamedItem("class").value));
+            console.log(yesId);
+            return setTouching(touching+1);
+          }
+          // else {
+          //   setTouching(false);
+          // }
+        }
+      }
+    )
+    if (yesId !== "") {
+    return setTouching(touching+1)}
+  }, [seconds, pointerPosition, currentPos, touching]);
+
   useEffect(() => {
     for (let i = 0; i < images.length; i++) {
       if (
-        getBottom(`[data-id="${i}"]`) > getHeigth("#bag") / 4 + getTop("#bag") - 5 &&
-        getBottom(`[data-id="${i}"]`) < getHeigth("#bag") / 4 + getTop("#bag") + 15 &&
+        getBottom(`[data-id="${i}"]`) >
+          getHeigth("#bag") / 4 + getTop("#bag") - 5 &&
+        getBottom(`[data-id="${i}"]`) <
+          getHeigth("#bag") / 4 + getTop("#bag") + 15 &&
         getLeft(`[data-id="${i}"]`) >= getLeft(`#bag`) &&
         getRight(`[data-id="${i}"]`) <= getRight(`#bag`)
       ) {
-        setCurrentPos(pointerPosition.x);
+        setCurrentPos(pointerPosition);
+        // if (images[i].fit === "yes") {
+        //   setYesId(yesId + 1);
+        // }
       }
       if (
-        getBottom(`[data-id="${i}"]`) > getHeigth("#bag") / 4 + getTop("#bag") - 5 &&
-        getBottom(`[data-id="${i}"]`) < getHeigth("#bag") / 4 + getTop("#bag") + 15 &&
+        getBottom(`[data-id="${i}"]`) >
+          getHeigth("#bag") / 4 + getTop("#bag") - 5 &&
+        getBottom(`[data-id="${i}"]`) <
+          getHeigth("#bag") / 4 + getTop("#bag") + 15 &&
         (getLeft(`[data-id="${i}"]`) <= getLeft(`#bag`) ||
           getRight(`[data-id="${i}"]`) >= getRight(`#bag`))
       ) {
@@ -240,6 +329,7 @@ const Page2 = ({ phase, setPhase }) => {
         }}
       >
         <div
+          id="holder"
           style={{
             width: "100%",
             height: "100%",
@@ -248,40 +338,80 @@ const Page2 = ({ phase, setPhase }) => {
             overflow: " visible",
           }}
         >
-          {/* {console.log(noId)} */}
           {slike}
+          {/*document.body?.querySelector(`#holder`)?.children
+            ? [].forEach.call(
+                document.body?.querySelector(`#holder`)?.children,
+                (element) => {
+                  // console.log(element.attributes.getNamedItem("class").value)
+                  if (
+                    getBottom(
+                      `.${element.attributes.getNamedItem("class").value}`
+                    ) > getTop(`#bag`) &&
+                    getTop(
+                      `.${element.attributes.getNamedItem("class").value}`
+                    ) <
+                      getTop(`#bag`) +
+                        getHeigth(
+                          `.${element.attributes.getNamedItem("class").value}`
+                        ) &&
+                    getLeft(
+                      `.${element.attributes.getNamedItem("class").value}`
+                    ) >= getLeft(`#bag`) &&
+                    getRight(
+                      `.${element.attributes.getNamedItem("class").value}`
+                    ) <= getRight(`#bag`)
+                  ) {
+                    console.log(element.attributes.getNamedItem("class").value);
+                  }
+                }
+              )
+              : ""*/}
         </div>
       </div>
       <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
         <div className={style.bag}>
-          {/* <div
-            // {...bindObjPos()}
-            // {...bindBagPos()}
-            id="bag"
-            style={{
-              position: "relative",
-              bottom: "0",
-              left: pointerPosition.x,
-              touchAction: "none",
-              userSelect: "none",
-              width: "min(40%, 170px",
-            }}
-          >  */}
           <img
             alt="bag"
-            id="bag"
-            onPointerMove={handlePointerMove}
-            src={bag}
+            src={bagfront}
             style={{
               position: "relative",
               bottom: "0",
-              left: pointerPosition.x,
+              left: pointerPosition,
               touchAction: "none",
               userSelect: "none",
-              width: "min(40%, 170px",
+              width: "min(40%, 170px)",
               transform: "translate(-50%,0)",
             }}
           ></img>
+          <img
+            alt="bag"
+            src={bagend}
+            style={{
+              position: "absolute",
+              top: "0",
+              left: pointerPosition,
+              touchAction: "none",
+              userSelect: "none",
+              width: "min(40%, 170px)",
+              transform: "translate(-50%,0)",
+            }}
+          ></img>
+          <div
+            id="bag"
+            onPointerMove={handlePointerMove}
+            style={{
+              position: "absolute",
+              bottom: "0",
+              left: pointerPosition,
+              touchAction: "none",
+              userSelect: "none",
+              width: "min(40%, 170px)",
+              height: " 70%",
+              transform: "translate(-50%,0)",
+              //  backgroundColor: "red",
+            }}
+          ></div>
           {/* </div> */}
         </div>{" "}
       </div>
