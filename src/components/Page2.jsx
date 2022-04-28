@@ -9,7 +9,7 @@ const Page2 = ({ phase, setPhase }) => {
   const [currentPos, setCurrentPos] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const [objects, setObjects] = useState([]);
-  const [touching, setTouching] = useState(0);
+  const [touching, setTouching] = useState(5);
   const noId = [];
   const [inBag, setInBag] = useState({ firstKey: "", secondKey: "" });
   const [seconds, setSeconds] = useState(0);
@@ -22,7 +22,7 @@ const Page2 = ({ phase, setPhase }) => {
   const handleBtn = () => {
     if (phase === 4) {
       setObjects(shuffle(images));
-      setTouching(0);
+      setTouching(5);
       setInBag({ firstKey: "", secondKey: "" });
       setPhase(5);
       setSeconds(0);
@@ -35,7 +35,7 @@ const Page2 = ({ phase, setPhase }) => {
       setIsGame(false);
       setObjects(shuffle(images));
       setBtnStyle(style.btnNext);
-      setTouching(0);
+      setTouching(5);
       setInBag({ firstKey: "", secondKey: "" });
       setPhase(4);
     }
@@ -144,9 +144,11 @@ const Page2 = ({ phase, setPhase }) => {
         ) {
           console.log(element.attributes.getNamedItem("class").value);
           if (element.attributes.getNamedItem("id").value === "no") {
-            element.style.transform = `translate(-50000px,${
+            element.style.transform = getLeft(`.${element.attributes.getNamedItem("class").value}`) > getLeft(`#bag`) + getWidth(`#bag`)/2 ? `translate(-50000px,${
               -window.innerHeight * 90
-            }px) `;
+            }px) ` : `translate(50000px,${
+              -window.innerHeight * 90
+            }px) `
           }
           if (element.attributes.getNamedItem("id").value === "yes") {
             setInBag(() => ({
@@ -154,14 +156,23 @@ const Page2 = ({ phase, setPhase }) => {
               secondKey: element.attributes.getNamedItem("class").value,
             }));
           }
+          // if (element.attributes.getNamedItem("data-id").value === "26") {
+          //   console.log(element.attributes.getNamedItem("class").value);
+          // }
         }
+        
       }
     );
+    if (getBottom('[data-id="26"]') > getTop(`#bag`)) {
+      const timer = setTimeout(() => {
+        setPhase(7);
+      }, 2000);
+    }
     if (inBag.firstKey !== inBag.secondKey) {
-      return setTouching(touching + 1);
+      return setTouching(touching - 1);
     }
     if (inBag.firstKey === "" && inBag.secondKey === "") {
-      return setTouching(0);
+      return setTouching(5);
     }
   }, [seconds, pointerPosition, currentPos, touching, inBag]);
 
@@ -207,7 +218,7 @@ const Page2 = ({ phase, setPhase }) => {
     }
   }, [phase, setPhase]);
   useEffect(() => {
-    if (touching > 4) {
+    if (touching < 1) {
       setPhase(6);
     }
     
@@ -225,21 +236,50 @@ const Page2 = ({ phase, setPhase }) => {
         touchAction: "none",
       }}
     >
+      <div style={{
+        position: "absolute",
+        width: "15vw",
+        height: "15vw",
+        top: "2%",
+        right: "2%",
+      }}>
       <img
         src="https://i.imgur.com/ZyJN2ed.png"
         className={style.countdown}
         alt="countdown"
         style={{
           position: "absolute",
-          width: "15%",
-          top: "2%",
-          right: "2%",
+          width: "100%",
+          // top: "2%",
+          // right: "2%",
           animationDuration: `20s`,
-          opacity: `${isGame ? 1 : 0}`,
+          // opacity: `${isGame ? 1 : 0}`,
           transition: `opacity 1s ease`,
-          zIndex: `${isGame ? 1 : 0}`,
+          // zIndex: `${isGame ? 1 : 0}`,
         }}
       />
+      <span style={{
+          position: "absolute",
+           width: "100%",
+           height: "100%",
+          // top: "2%",
+          // right: "2%",
+          // textAlign: "center",
+          // verticalAlign: "middle",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "1.5rem",
+          color: "rgb(26,59,88)",
+          textShadow: "1px 1px 2px rgba(252,252,252,0.5), 1px 3px 2px rgba(152,152,252,0.5)",
+          // animationDuration: `20s`,
+          // opacity: `${isGame ? 1 : 0}`,
+          transition: `opacity 1s ease`,
+          // zIndex: `${isGame ? 1 : 0}`,
+        }}>
+        {touching >= 0 ? touching : 0}
+      </span>
+      </div>
       {phase === 4 ? gameintro : null}
       {overlay}
       <div
