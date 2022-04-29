@@ -219,7 +219,7 @@ const Page2 = ({ phase, setPhase }) => {
   }, [phase, setPhase]);
   useEffect(() => {
     if (touching < 1) {
-      setPhase(6);
+      setPhase(7);
     }
     
     const timer = setTimeout(() => {
