@@ -253,9 +253,9 @@ const Page2 = ({ phase, setPhase }) => {
           // top: "2%",
           // right: "2%",
           animationDuration: `20s`,
-          // opacity: `${isGame ? 1 : 0}`,
+           opacity: `${isGame ? 1 : 0}`,
           transition: `opacity 1s ease`,
-          // zIndex: `${isGame ? 1 : 0}`,
+           zIndex: `${isGame ? 1 : 0}`,
         }}
       />
       <span style={{
@@ -273,9 +273,9 @@ const Page2 = ({ phase, setPhase }) => {
           color: "rgb(26,59,88)",
           textShadow: "1px 1px 2px rgba(252,252,252,0.5), 1px 3px 2px rgba(152,152,252,0.5)",
           // animationDuration: `20s`,
-          // opacity: `${isGame ? 1 : 0}`,
+           opacity: `${isGame ? 1 : 0}`,
           transition: `opacity 1s ease`,
-          // zIndex: `${isGame ? 1 : 0}`,
+           zIndex: `${isGame ? 1 : 0}`,
         }}>
         {touching >= 0 ? touching : 0}
       </span>
