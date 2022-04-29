@@ -3,12 +3,14 @@ import { images, shuffle } from "../helpers/images";
 import style from "./Page2.module.css";
 import bagfront from "../assets/images/bagfront.png";
 import bagend from "../assets/images/bagend.png";
+import sorry from "../assets/images/sorry.png";
 
 const Page2 = ({ phase, setPhase }) => {
   const [pointerPosition, setPointerPosition] = useState(window.innerWidth / 2);
   const [currentPos, setCurrentPos] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const [objects, setObjects] = useState([]);
+  const [tooBig, setTooBig] = useState(false);
   const [touching, setTouching] = useState(5);
   const noId = [];
   const [inBag, setInBag] = useState({ firstKey: "", secondKey: "" });
@@ -149,6 +151,10 @@ const Page2 = ({ phase, setPhase }) => {
             }px) ` : `translate(50000px,${
               -window.innerHeight * 90
             }px) `
+            setTooBig(true);
+            const timer = setTimeout(() => {
+              setTooBig(false);
+            }, 1000);
           }
           if (element.attributes.getNamedItem("id").value === "yes") {
             setInBag(() => ({
@@ -174,7 +180,7 @@ const Page2 = ({ phase, setPhase }) => {
     if (inBag.firstKey === "" && inBag.secondKey === "") {
       return setTouching(5);
     }
-  }, [seconds, pointerPosition, currentPos, touching, inBag]);
+  }, [seconds, pointerPosition, currentPos, touching, inBag, setPhase]);
 
   useEffect(() => {
     for (let i = 0; i < images.length; i++) {
@@ -236,6 +242,15 @@ const Page2 = ({ phase, setPhase }) => {
         touchAction: "none",
       }}
     >
+      <img src={sorry} alt="background" style={{ 
+        position: "absolute",
+        width: "50%",
+        top: "30%",
+        left: "50%",
+        transform: "translate(-50%,-50%)",
+        opacity: tooBig ? "0.6" : "0",
+        transition: "opacity 0.5s linear",
+        }} />
       <div style={{
         position: "absolute",
         width: "15vw",
