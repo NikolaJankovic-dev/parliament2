@@ -136,9 +136,9 @@ const Page2 = ({ phase, setPhase }) => {
         if (
           getBottom(`.${element.attributes.getNamedItem("class").value}`) >
             getTop(`#bag`) &&
-          getTop(`.${element.attributes.getNamedItem("class").value}`) <
+          getBottom(`.${element.attributes.getNamedItem("class").value}`) <
             getTop(`#bag`) +
-              getHeigth(`.${element.attributes.getNamedItem("class").value}`) &&
+              (getHeigth(`.${element.attributes.getNamedItem("class").value}`)/4) &&
           getLeft(`.${element.attributes.getNamedItem("class").value}`) >=
             getLeft(`#bag`) &&
           getRight(`.${element.attributes.getNamedItem("class").value}`) <=

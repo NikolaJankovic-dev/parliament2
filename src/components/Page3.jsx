@@ -1,65 +1,77 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import style from "./Page3.module.css";
 import Video11 from "../assets/videos/Video11.mp4";
 import Video2 from "../assets/videos/Video2.mp4";
 import Video31 from "../assets/videos/Video31.mp4";
-import par2 from "../assets/videos/Parliament.mp4";
+import Parliament from "../assets/videos/Parliament.mp4";
 
 const Page3 = ({ phase, setPhase }) => {
-  const [msg1, setMsg1] = useState(style.msg1);
-  const [msg2, setMsg2] = useState(style.msg2);
+  
   useEffect(() => {
     if (phase < 8) {
-      setMsg1(style.msg1);
-      setMsg2(style.msg2);
       const timer = setTimeout(() => {
         setPhase(phase + 1);
-      }, 3000);
+      }, 500);
       return () => clearTimeout(timer);
-    }
-    if (phase === 10) {
-      setMsg1(style.msg11);
-      setMsg2(style.msg21);
-    }
-    if (phase === 11) {
-      setMsg1(style.msg12);
-      setMsg2(style.msg22);
-    }
-    if (phase === 12) {
-      setMsg1(style.msg13);
-      setMsg2(style.msg23);
     }
   }, [phase, setPhase]);
   return (
     <div className={style.page3}>
       <div
-        className={msg1}
-        style={{ opacity: (phase > 6 && phase < 9) || phase > 9 ? 1 : 0 }}
+        className={style.msg1}
+        style={{
+          opacity: phase >= 7 && phase <= 8 ? 1 : 0,
+          transition:
+            phase >= 7 && phase <= 8
+              ? "opacity 2s ease 1s"
+              : "opacity 2s ease 0s",
+        }}
+      ></div>
+      <div
+        className={style.msg11}
+        style={{
+          opacity: phase === 10 ? 1 : 0,
+          transition:
+            phase === 10 ? "opacity 1s ease 1s" : "opacity 1s ease 0s",
+        }}
+      ></div>
+      <div
+        className={style.msg12}
+        style={{
+          opacity: phase === 11 ? 1 : 0,
+          transition:
+            phase === 11 ? "opacity 2s ease 1s" : "opacity 2s ease 0s",
+        }}
+      ></div>
+      <div
+        className={style.msg13}
+        style={{
+          opacity: phase >= 12 ? 1 : 0,
+          transition: phase >= 12 ? "opacity 2s ease 1s" : "opacity 2s ease 0s",
+        }}
       ></div>
       <div className={style.bubble}>
-        {/* <div className={style.pack1} style={{ opacity: phase >= 7 ? 1 : 0 }}> */}
-          <video
-            src={par2}
-            controls={false}
-            autoPlay
-            playsInline
-            muted
-            type="video/mp4"
-            style={{
-              width: "100vw",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              opacity: phase >= 7 && phase <=8 ? 1 : 0,
-            }}
-          />
-          <div className={style.pack5} style={{ opacity: phase >= 9 ? 1 : 0 }}></div>
-        {/* </div> */}
-        {/* <div className={style.pack2} style={{opacity: phase === 9 ? 1 : 0}}></div> */}
-        {/* <div className={style.pack3} style={{opacity: phase === 10 ? 1 : 0}}></div>
-        <div className={style.pack4} style={{opacity: phase === 11 ? 1 : 0}}></div>
-        <div className={style.pack5} style={{opacity: phase === 12 ? 1 : 0}}></div> */}
+        <video
+          src={phase > 7 ? Parliament : ""}
+          controls={false}
+          autoPlay
+          playsInline
+          muted
+          type="video/mp4"
+          style={{
+            width: "100vw",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            opacity: phase === 8 ? 1 : 0,
+            transition: "opacity 1s ease",
+          }}
+        />
+        <div
+          className={style.pack5}
+          style={{ opacity: phase === 9 ? 1 : 0 }}
+        ></div>
         <div className={style.video1} style={{ opacity: phase === 10 ? 1 : 0 }}>
           <video
             src={Video11}
@@ -108,15 +120,30 @@ const Page3 = ({ phase, setPhase }) => {
           />
         </div>
       </div>
-      <div className={msg2}>
-        <div
-          style={{ opacity: (phase > 7 && phase < 9) || phase > 9 ? 1 : 0 }}
-        ></div>
-      </div>{" "}
+      <div className={style.msg2}>
+        <div style={{ opacity: phase === 8 ? 1 : 0,
+        transition: phase === 8 ? "opacity 2s ease 3s" : "opacity 2s ease 0s" }}>
+        </div>
+      </div>
+      <div className={style.msg21}>
+        <div style={{ opacity: phase === 10 ? 1 : 0,
+        transition: phase === 10 ? "opacity 2s ease 1s" : "opacity 2s ease 0s" 
+        }}></div>
+      </div>
+      <div className={style.msg22}>
+        <div style={{ opacity: phase === 11 ? 1 : 0,
+        transition: phase === 11 ? "opacity 2s ease 1s" : "opacity 2s ease 0s"
+         }}></div>
+      </div>
+      <div className={style.msg23}>
+        <div style={{ opacity: phase >= 12 ? 1 : 0,
+        transition: phase >= 12 ? "opacity 2s ease 1s" : "opacity 2s ease 0s"
+        }}></div>
+      </div>
       <button
         className={style.btnL}
         onClick={() => setPhase(phase + 1)}
-        style={{ opacity: phase > 7 ? 1 : 0 }}
+        style={{ opacity: phase > 7 && phase < 12 ? 1 : 0 }}
       ></button>
     </div>
   );

@@ -55,11 +55,11 @@
   background-position: center;
   background-repeat: no-repeat;
   overflow: visible;
-  -webkit-animation: opacityy 2s ease;
-          animation: opacityy 2s ease;
+  -webkit-animation: opacityy 3s ease;
+          animation: opacityy 3s ease;
   -webkit-animation-iteration-count: 1;
           animation-iteration-count: 1;
-  transition: all 1s ease;
+  transition: all 2s ease;
 }
 
 .move {
@@ -70,7 +70,7 @@
   transform: translate(-50%, 0);
   background-image: url("https://i.imgur.com/URY7uM9.png");
   background-size: 80% auto;
-  background-position: center 45%;
+  background-position: center 35%;
   background-repeat: no-repeat;
   -webkit-animation: opacityy2 6s ease;
           animation: opacityy2 6s ease;

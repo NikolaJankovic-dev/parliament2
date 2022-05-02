@@ -3,19 +3,18 @@ import style from "./Page1.module.css";
 
 const Page1 = ({ phase, setPhase }) => {
   useEffect(() => {
-    let time;
     const timer = setTimeout(() => {
       if (phase === 0) {
         setPhase(1);
-        time = 1000
       }
       if (phase === 3) {
         setPhase(4)
-        time = 2000
       }
-    }, time);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [phase, setPhase]);
+
+  
 
   return (
     <div className={style.page1}>
