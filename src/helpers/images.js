@@ -34,7 +34,7 @@ export function shuffle(array) {
   }
   return array;
 }
-const sizes = [2.5,3,3.5]
+const sizes = [2,2.5,3]
  
 const tabletCaseObj = {
     name: 'tabletCase',
@@ -48,7 +48,7 @@ const heelsObj = {
     image: heels,
     width: shuffle(sizes)[0],
     left: Math.random() * ((window.innerWidth - (window.innerWidth/3))),
-    fit: 'no'
+    fit: 'yes'
 }
 const glassesObj = {
     name: 'glasses',
@@ -146,14 +146,14 @@ const bookObj = {
     image: book,
     width: shuffle(sizes)[0],
     left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
-    fit: 'no'
+    fit: 'yes'
 }
 const notebookObj = {
     name: 'notebook',
     image: notebook,
     width: shuffle(sizes)[0],
     left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
-    fit: 'no'
+    fit: 'yes'
 }
 const lipstickObj = {
     name: 'lipstick',
@@ -209,7 +209,7 @@ const coffeeMakerObj = {
     image: coffeeMaker,
     width: shuffle(sizes)[0],
     left: Math.random() * (window.innerWidth - (window.innerWidth/3)),
-    fit: 'yes'
+    fit: 'no'
 }
 const bunnyObj = {
     name: 'bunny',
